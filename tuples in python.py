@@ -1,0 +1,6 @@
+t = ("RAJA",10,9.69,53.76)
+print(t)
+print(t[1:3])
+print(t[2:])
+print(t*2)
+print(t+t)

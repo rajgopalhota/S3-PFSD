@@ -1,0 +1,25 @@
+import csv
+
+head = ["Emp ID", "Name", "DOB", "Designation", "Years Of Experience", "No of Leaves", "Salary"]
+
+data = [
+    [1, "RAJA", "05-07-2003", "Team lead", 10, 0, 150000],
+    [2, "POOJA", "05-11-2003", "Team Coordinator", 11, 1, 123000],
+    [3, "Rakhi", "05-02-2003", "Tester", 16, 2, 100000],
+    [4, "Manu", "11-09-2003", "Manager", 4, 3, 100000],
+    [5, "Rajendar", "12-07-2002", "Developer", 2, 4, 112000],
+    [6, "Pavan", "13-12-2003", "Instructor", 3, 6, 17000],
+    [7, "Jagga", "23-07-2003", "Communicator", 6, 11, 50000],
+    [8, "Smriti", "25-07-2003", "Maintainer", 1, 13, 19000],
+    [9, "Pihu", "29-07-2003", "Analyzer", 4, 0, 70000],
+    [10, "Ram", "19-07-2003", "Coder", 2, 14, 20000],
+    [11, "Samrat", "05-07-2005", "Coder", 9, 4, 122000]
+]
+with open("Employee.csv","w") as rj:
+    z = csv.writer(rj)
+    z.writerow(head)
+    z.writerows(data)
+with open('Employee.csv','rt') as file:
+    rows=csv.reader(file)
+    for row in rows:
+        print(row)

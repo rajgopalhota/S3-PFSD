@@ -18,10 +18,9 @@ student2 = [{"regd":"222","Name":"Raj"},
 
 #Insert Documents
 #Insert One Doc
-# studentdata.insert_one(student1)
-#
+studentdata.insert_one(student1)
 # #Insert Many Docs
-# studentdata.insert_many(student2)
+studentdata.insert_many(student2)
 
 
 

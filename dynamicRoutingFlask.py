@@ -1,5 +1,5 @@
 #import Flask
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
 
 #Create an Instance
 app = Flask(__name__)
@@ -65,6 +65,16 @@ def sample9():
 
 
 #Flask Form handling using flask
+@app.route('/form/example', methods=('POST', 'GET'))
+def sample10():
+    if request.method == 'POST':
+        name = request.form.get('stu_name')
+        number = request.form.get('stu_no')
+        return render_template('studentdetails.html', name=name, number = number)
+    else:
+        return "Invalid logn"
+
+
 
 if __name__ == "__main__":
     app.run()

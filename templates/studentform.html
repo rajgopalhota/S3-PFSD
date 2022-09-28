@@ -1,6 +1,13 @@
 <!--<form action="/form/example" method="post">-->
+<head>
+    <link rel="stylesheet" href="{{url_for('static',filename='styles/main.css')}}">
+</head>
+<body>
 <form action="http://localhost:5000/form/example" method="post">
+    <h1>Registration Form.....</h1>
+    <img src="{{url_for('static',filename='images/name')}}">
     Name: <input type = "text" name = "stu_name"><br>
     Regd NO: <input type="text" name = "stu_no"><br>
     <input type="submit" value="click here">
 </form>
+</body>

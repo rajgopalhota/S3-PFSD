@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %} Schedule Ride {% endblock title %}
+{% block body %}
+
+<div class="cust_book">
+    <a href="#"><img src="/static/styles/Images&Gifs/homeico.png" class="homemin"></a>
+      <h1>Schedule Ride</h1>
+  <form method="POST" action="">
+    {% csrf_token %}
+      <div class="box">
+      From:<input type="text" class="in_box" name="s_from">
+      </div>
+      <div class="box">
+          To:<input type="text" class="in_box" name="s_dest">
+      </div>
+      <div class="box">
+          Date of travel:<input type="date" class="in_box" name="s_date">
+      </div>
+      <div class="box">
+          Pick up Time:<input type="time" class="in_box" name="s_time">
+      </div>
+      <div class="box">
+      Car type:<select name="s_optedcar" class="typedown">
+          <option value="volvo">Anything</option>
+          <option value="saab">Micro</option>
+          <option value="opel">SUV</option>
+          <option value="audi">Sedan</option>
+          <option value="audi">Limosine</option>
+      </select>
+      </div>
+      <div class="box">
+      Phone Number:<input type="number" class="in_box" name="s_phone">
+      <button class="cust_btn" type="submit"><img src="/static/styles/Images&Gifs/book.png">BOOK</button>
+      </div>
+      
+  </form>
+  </div>
+
+{% endblock body %}

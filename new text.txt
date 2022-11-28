@@ -1,0 +1,729 @@
+multilevel inheritance
+---------------------------------------------------------------
+
+class circle:
+    radius="NULL"
+    def cperi(self,radius):
+        cirperi=self.radius*2*3.14
+        print("Perimeter of Circle :",cirperi)
+class rectangle:
+    length="NULL"
+    breadth="NULL"
+    def rperi(self,l,b):
+       recperi=2*(self.length+self.breadth)
+       print("Perimeter of Rectangle :",recperi)
+class triangle:
+    side1="NULL"
+    side2="NULL"
+    side3="NULL"
+    def tperi(self,s1,s2,s3):
+        tperi=self.side1+self.side2+self.side3
+        print("Perimeter of Triangle :",tperi)
+class perimeter(circle,rectangle,triangle):
+    def init(self,r,l,b,s1,s2,s3):
+        self.radius=r
+        self.length=l
+        self.breadth=b
+        self.side1=s1
+        self.side2=s2
+        self.side3=s3
+p=perimeter(float(input("Enter the Radius of CIRCLE :")),float(input("Enter Length of rectangle :")),float(input("Enter Breadth")),float(input("Enter the Sides of triangle :")),float(input()),float(input()))
+p.cperi(p.radius)
+p.rperi(p.length,p.breadth)
+p.tperi(p.side1,p.side2,p.side3)
+
+multilevel inheritance
+--------------------------------------------------------------
+class Conformation :
+    def display(self):
+     print("Your ticket is booked")
+class detiles(Conformation):
+   a1,b1,c1 ='null',"null","null"
+   def __init__(self,a,b,c):
+        self.a1=a
+        self.b1=b
+        self.c1=c
+   def display(self):
+        print("name:",self.a1)
+        print("date",self.b1)
+        print("type:",self.c1)
+
+class j(detiles):
+    a,b="null","null"
+    def __init__(self,a,b):
+        self.a=a
+        self.b=b
+    def display(self):
+        print("Soucre :",self.a)
+        print("Destination",self.b)
+
+n=input("enter your Source: ")
+n1=input("enter your destination: ")
+n2=input("enter your name: ")
+n3=input("enter date: ")
+n4=input("want a sleeper or Ac: ")
+obj=j(n,n1)
+obj1=detiles(n2,n3,n4)
+obj2=Conformation()
+obj2.display()
+obj1.display()
+obj.display()
+
+
+
+Mongo db
+---------------------------------------------------------------
+from pymongo import MongoClient
+
+client = MongoClient('mongodb://localhost:27017/')
+db = client['Student']
+studentda=db.Student
+def add():
+   name =input("enter name : ")
+   id = input ("enter id : ")
+   student={name:id}
+   studentda.insert_one(student)
+def delete():
+    name = input("enter name : ")
+    id=input("enter id :")
+    tofind1= {name:id}
+    for x in tofind1:
+        l={name:id}
+        print(studentda.find_one(tofind1))
+        studentda.delete_one(l)
+def modify():
+    name = input("enter name : ")
+    id = input("enter id :")
+    tofind1 = {name: id}
+    for x in tofind1:
+        l = {name: id}
+        print(studentda.find_one(tofind1))
+        studentda.delete_one(l)
+    name = input("enter name to modify : ")
+    id = input("enter id to modify : ")
+    student = {name: id}
+    studentda.insert_one(student)
+
+o=1
+while(o!=0):
+    k=input("1.add 2.delete 3.modify 4.exit : ")
+    if(k=='1'):
+        add()
+    if(k=='2'):
+        delete()
+    if(k=='3'):
+        modify()
+    if(k=='4'):
+        o=0
+
+
+
+csv crud 
+----------------------------------------------------------------
+import csv,operator
+def add():
+  with open("Employees.csv", mode='w') as myfile:
+        n=int(input("ennter n"))
+        mywriter= csv.writer(myfile, delimiter=",")
+        for row in range(1,n+1):
+            empid= (input("enter employee number: "))
+            name= input("enter employee name: ")
+            salary= (input("enter employee salary: "))
+            DPt= input("enter employee address: ")
+            no_of_days= (input("enter no oy years: "))
+            designaton=input("enter deg : ")
+            DOB=input("enter dob : ")
+            Experience=input("enter experience")
+            mywriter.writerow([empid, name, salary, DPt,no_of_days,designaton,DOB,Experience])
+def sort_by_salary():
+    data = csv.reader(open('Employees.csv'), delimiter=',')
+    data = sorted(data, key=operator.itemgetter(2))
+    with open('Employees.csv', newline='') as csvfile:
+            spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+            for row in spamreader:
+                print(', '.join(row))
+
+def sort_by_no_of_days():
+    data = csv.reader(open('Employees.csv'), delimiter=',')
+    data = sorted(data, key=operator.itemgetter(4))
+
+    with open('Employees.csv', newline='') as csvfile:
+            spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+            for row in spamreader:
+                print(', '.join(row))
+def show():
+    with open('Employees.csv', newline='') as csvfile:
+        spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+        for row in spamreader:
+           print(', '.join(row))
+
+o=1
+while(o!=0):
+    k=input("1.add 2.sort_by_salary 3. sort_by_no_of_days 4.show 5.Exit :")
+    if(k=='1'):
+        add()
+    if(k=='2'):
+        sort_by_salary()
+    if(k=='3'):
+        sort_by_no_of_days()
+    if(k=='4'):
+        show()
+    if(k=='5'):
+        o=0
+
+
+exception
+----------------------------------------------------------------
+try:
+    a=int(input())
+    b=int(input())
+    c=a/b
+    print("c")
+except Exception as e:
+    print(e)
+except IOError:
+    print("IOError")
+else:
+    print("printing from else block")
+
+
+
+pytest(parametrized)
+-------------------------------------------------------------------
+import pytest
+@pytest.mark.parametrize(("n","ou"),[(1,"not prime"),(2,"prime"),(3,"prime")])
+def k(n,ou):
+      for i in range (1,n+1):
+        c=0
+        for j in range(1,(n+1)):
+          if(i%j==0):
+            c=c+1
+      if(c==2):
+         ot="prime"
+      else:
+         ot="not prime"
+      assert ot==ou
+
+mail by flask
+-------------------------------------------------------------------
+from flask import *
+from flask_mail import Mail, Message
+import csv
+app = Flask(__name__)
+mail = Mail(app)  # instantiate the mail class
+# configuration of mail
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'gsarathchandra1382@gmail.com'
+app.config['MAIL_PASSWORD'] = 'kpypqznhdijakmug'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
+@app.route("/")
+def Index():
+    with open ('mailcsv.csv','r')as f:
+        reader = csv.reader(f)
+        next(reader)
+        for name,addr in reader:
+            msg = Message(f'HELLO {name} .This is 2100032410 Sarath chandra Reddy)',sender = 'gsarathchandra1382@gmail.com', recipients=[addr])
+            msg.body = 'Good evening sir.... this is python generated email sir S17 '
+            mail.send(msg)
+            print(f'sent to {name}')
+
+if __name__=='__main__':
+    app.run(debug=True)
+
+
+pytest (normal)
+---------------------------------------------------------------
+def cal_square(num):
+    return num*num
+
+def testcalsquare1():
+    result = cal_square(5)
+    assert result==25
+
+
+def testcalsquare2():
+    result = cal_square(7)
+    assert result == 50
+
+def  calsquare3():
+    result =cal_square(8)
+    assert result == 64
+
+def testcalsquare4():
+    result = cal_square(9)
+    assert result == 81
+----------------------------------------------------------------------------------------
+
+import datetime
+import time
+#print(time.time())
+
+print(time.asctime(time.localtime(time.time())))
+
+datetime_object =datetime.datetime.now()
+print(datetime_object)
+
+
+import calendar
+s = calendar.prcal(2022)
+
+def add(x,y):
+    return x+y
+def subtract(x,y):
+    return x-y
+print( "select operation.")
+print("1.Add")
+print("2.Subtract")
+while True:
+    choice = input("Enter choice(1/2):")
+
+if choice in ('1', '2'):
+    num1 = int(input("Enter first number: "))
+    num2 = int(input("Enter second  number: "))
+    if choice == 1:
+        print(num1, "+", num2, "=", add(num1, num2))
+    elif choice == 2:
+        print(num1, "-", num2, "=", subtract(num1, num2))
+----------------------------------------------------------------------------------------------
+
+flask1
+
+from flask import Flask,render_template
+import os
+import pymongo
+from urllib.parse import quote_plus
+import pprint
+
+app=Flask(__name__)
+
+picFolder=os.path.join('static','images')
+
+app.config['UPLOAD_FOLDER']=picFolder
+
+@app.route('/')
+def hi():
+    a=os.path.join(app.config['UPLOAD_FOLDER'], 'user.jpg')
+    return render_template('homepage.html',user_image=a)
+@app.route('/contactus')
+def index():
+    return render_template('contact.html')
+@app.route('/privacyterms')
+def terms():
+    return render_template('privacyterms.html')
+@app.route('/about')
+def hello():
+    return render_template('about.html')
+@app.route('/signin')
+def hoo():
+    return render_template('signup.html')
+@app.route('/welcome')
+def hihi():
+    pic1=os.path.join(app.config['UPLOAD_FOLDER'], 'pawnbroker.jpg')
+    return render_template('welcome.html',user_image=pic1)
+if __name__=='__main__':
+    app.run(debug=True)
+-----------------------------------------------------------------------------------
+
+import pytest
+@pytest.mark.parametrize(("num","output"),[(1,1),(2,3),(3,6),(4,24)])
+def test_factorial(num,output):
+    fact=1
+    for i in range (1,num+1):
+        fact=fact*i
+    assert fact==output
+--------------------------------------------------------------
+passenger
+
+class c:
+    def disp(self):
+       print("your ticket is booked")
+class Reservation(c):
+    __source="null"
+    __destination="null"
+    __name = "null"
+    __nofp = "null"
+    def __init__(self , source, destination, name,nofp):
+            self.__source = source
+            self.__destination = destination
+            self.__name = name
+            self.__nofp = nofp
+
+    def display(self):
+         print("enter the source :", self.__source)
+         print("enter the destination:", self.__destination)
+         print("enter the name :", self.__name)
+         print("enter the nofp:", self.__nofp)
+
+
+
+n1 = input("enter your source: ")
+n2 =input("enter your destination: ")
+n3 =input("enter your name: ")
+n4 =input("enter your nofp: ")
+obj =Reservation(n1,n2,n3,n4)
+obj.display()
+obj.disp()
+-------------------------------------------------------------------
+
+multiple
+
+
+import math
+class circle:
+    a=0
+    def __init__(self,a):
+        self.a=a
+    def area(self):
+       print (self.a*self.a*math.pi)
+    def perimeter(self):
+        print(self.a*2*math.pi)
+class rect:
+    a=0
+    b=0
+    def area(self):
+        print(self.a*self.b)
+    def perimeter(self):
+        print(2*(self.a+self.b))
+class tri:
+    a,b,c=0,0,0
+    def area(self):
+        print(0.5*self.b*self.c)
+    def perimater(self):
+        print(self.a+self.b+self.c)
+n=int(input("enter no of inputs "))
+if(n==1):
+   obj= circle(int(input()))
+   obj.area()
+   obj.perimeter()
+if(n==2):
+    a=int(input())
+    b=int(input())
+    obj1=rect()
+    obj1.a=a
+    obj1.b=b
+    obj1.area()
+    obj1.perimeter()
+if(n==3):
+    a = int(input())
+    b = int(input())
+    c=int(input())
+    obj2=tri()
+    obj2.a=a
+    obj2.b=b
+    obj2.c=c
+    obj2.area()
+    obj2.perimater()
+--------------------------------------------------------
+csv
+
+import csv
+
+with open('names.csv', 'r') as csv_file:
+    csv_reader = csv.DictReader(csv_file)
+
+    with open('new_names.csv', 'w') as new_file:
+        fieldnames = ['first_name', 'last_name']
+
+        csv_writer = csv.DictWriter(new_file, fieldnames=fieldnames, delimiter='\t')
+
+        csv_writer.writeheader()
+
+        for line in csv_reader:
+            del line['email']
+            csv_writer.writerow(line)
+-------------------------------------------------------------------------------
+it is an python to database connection.
+
+the only difference is we dont have any sql queries.
+directly calling 
+
+
+
+--------->
+1. sql alchemy works based on the concept of object relational map.
+
+2. we dont use sql commands in sql alchemy.
+
+3. to use sql alchemy , we need to install (pip install sqlalchemy).
+
+4. create_engine() is a function  which connects your python code to database.
+
+5. using sql alchemy we can connect to any database like postgre,mongodb etc..
+
+db_uri = "sqlite:///db.sqlite" --> example for sql lite database command
+import sql alchemy
+
+
+metadata() function.
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------------
+
+sql alchemy
+
+
+from sqlalchemy import create_engine, MetaData, Table, Column ,Integer, String
+#creating database
+engine = create_engine('sqlite:///college.db', echo = True)
+metadata = MetaData(bind = engine)
+
+#creating table inside the database
+students = Table('students', metadata,
+                 Column('id',Integer, primary_key=True),
+                 Column('name',String),
+                 Column('lastname',String))
+
+data = [[100,'koushik','sai'],
+        [101,'sai','kishore']
+       ]
+
+
+metadata.create_all()
+result = engine.execute(students.insert().values(data))
+
+
+conn = engine.connect()
+engine.execute(students)
+
+#fetching the data from table first we need to select first
+
+#s= students.select()
+#result = conn.execute(s)
+#for row in result:
+#    print(row)
+
+#inserting  the data in table
+
+ins = students.insert().values(name= 'MANISH', lastname = 'KUMAR')
+
+# ins1 = [[34,"SARATH","CHANDHRA"],[35,"KISHORE","SAI"],[36,"PAVANI","KOUSHIK"]]
+
+# ins2 = students.insert().values(ins1)
+# conn = engine.connect()
+# result1 = conn.execute(ins2)
+
+engine.execute(ins)
+s= students.select()
+result = conn.execute(s)
+for row in result:
+   print(row)
+
+creating table:
+
+
+ students =Table( 'students' , meta, column('id' , Integer , primey_key = True)
+
+
+
+engine.execute(students.insert().values(ins1))
+
+----------------------------------------------------------------
+django crud
+
+from django.shortcuts import render
+
+# Create your views here.
+from django.shortcuts import render
+
+# Create your views here.
+from django.shortcuts import render, redirect
+from .forms import EmployeeForm
+from .models import Employee
+
+# Create Employee...
+def insert_emp(request):
+    if request.method == "POST":
+        EmpId = request.POST['EmpId']
+        EmpName = request.POST['EmpName']
+        EmpGender = request.POST['EmpGender']
+        EmpEmail = request.POST['EmpEmail']
+        EmpDesignation = request.POST['EmpDesignation']
+        data = Employee(EmpId=EmpId, EmpName=EmpName, EmpGender=EmpGender, EmpEmail=EmpEmail,
+                        EmpDesignation=EmpDesignation)
+        data.save()
+        return redirect('show/')
+    else:
+        return render(request, 'insert.html')
+
+# Retrive Employee
+def show_emp(request):
+    employees = Employee.objects.all()
+    return render(request,'show.html',{'employees':employees} )
+
+# Update Employees...
+
+# Update Employee
+def edit_emp(request,pk):
+    employees = Employee.objects.get(id=pk)
+    if request.method == "POST":
+        return redirect('/show')
+    context = {
+        'employees': employees,
+    }
+    return render(request,'edit.html',context)
+# Delete Employees...
+
+# Delete Employee
+def remove_emp(request, pk):
+    employees = Employee.objects.get(id=pk)
+    if request.method == 'POST':
+        employees.delete()
+        return redirect('/show')
+    context = {
+        'employees': employees,
+    }
+    return render(request, 'delete.html', context)
+
+----------------------------------------------------------------
+
+django mail 
+
+
+from django.shortcuts import render
+from django.core.mail import send_mail
+from django.http import HttpResponse
+import csv
+# Create your views here.
+def login(request):
+    return render(request,'newuserlogin.html')
+
+def photo(request):
+    return render(request,'photo.html')
+
+def mail(request):
+    send_mail(
+        'Test Mail Using Django Framework',
+        'Hello Sir/Mam',
+        'koushikpavani6@gmail.com',
+        ['kiransurya93@kluniversity.in','suryakiranmtechcse@gmail.com'],
+
+        fail_silently=False,
+    )
+    return print('Mail Sent')
+def mail2(request):
+    with open("{% static 'try.csv','r'") as f:
+        reader=csv.reader(f)
+        next(reader)
+    for name, addr in reader:
+        send_mail(
+            'Test Mail Using Django Framework',
+            'Hello Sir/Mam This is Django FrameWork',
+            'koushikpavani6@gmail.com',
+            ['kiransurya93@kluniversity.in', 'suryakiranmtechcse@gmail.com'],
+            fail_silently=False,
+        )
+
+----------------------------------------------------------------------
+
+from django.shortcuts import render
+from django.http import HttpResponse
+
+# create your views here.
+def home(request):
+    return HttpResponse("Hello World Example of PFSD")
+
+def home1(request):
+    return render(request,'secondapp.html')
+
+sql lite
+----------------------------------
+
+import sqlite3
+
+conn = sqlite3.connect('pfsd2.db')
+print("Opened database successfully")
+#creating a Table
+#conn.execute('''CREATE TABLE sqlLitexample(ID number,name text, sub1 character ,sub2 character  ,sub3 character )''')
+#print("Table created succesfully")
+
+conn.execute("Insert into sqlLitexample values(2100030261,'Koushik','DBMS','DAA','PFSD')")
+print("Inserted Successfully")
+
+cur = conn.cursor()
+for row in cur.execute("SELECT * FROM sqlLitexample"):
+    print(row)
+data1=[(2100032410,"Sarath",'DAA','AIDS','PFSD'),(2100030261,"Koushik",'DAA','AIDS','PFSD')]
+#inserting multiple data into the table
+cur.executemany('INSERT INTO sqlLitexample VALUES(?,?,?,?,?);',data1)
+print("Inserted Multiple data successfully")
+for row in cur.execute('SELECT * FROM sqlLitexample'):
+    print(row)
+ --------------------------------------------------------------------------------
+weather
+
+from flask import Flask, request, render_template
+import requests
+from urllib3.util import url
+
+app = Flask(__name__)
+@app.route('/', methods=["GET", "POST"])
+def index():
+    weatherData = ''
+    error = 0
+    cityName = ''
+    if request.method == "POST":
+        cityName = request.form.get("cityName")
+        if cityName:
+            weatherApiKey = '2b4f2f268b228c4e91c1c969a65f0b71'
+            url = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + weatherApiKey
+            weatherData = requests.get(url).json()
+        else:
+            error = 1
+    return render_template('index.html', data=weatherData, cityName=cityName, error=error)
+
+
+
+if __name__ == "__main__":
+    app.run()
+______________________________
+sql flask
+
+from flask import Flask, request,render_template
+from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, BigInteger
+
+app = Flask(__name__)
+@app.route("/newuser")
+def my_new_register_page():
+    return render_template("newuserregister.html")
+@app.route("/registeruser", methods=['POST','GET'])
+def my_register_user():
+ entered_name=request.form.get("username")
+ entered_mothername=request.form.get("mothername")
+ entered_fathername = request.form.get("fathername")
+ entered_mobileno = request.form.get("mobileno")
+ print(entered_name,entered_mothername,entered_fathername,entered_mobileno)
+ engine = create_engine('sqlite:///logindetails', echo=True)
+ meta = MetaData(bind=engine)
+ a = Table('a', meta,
+           Column('username', String),
+           Column('mothername', String),
+           Column('fathername', String),
+           Column('mobileno',String)
+           )
+ data=[entered_name,entered_mothername,entered_fathername,entered_mobileno]
+ meta.create_all()
+ result = engine.execute(a.insert().values(data))
+ s = a.select()
+ result = engine.connect().execute(s)
+ for row in result:
+     print(row)
+ return 'added success'
+if __name__ == "__main__":
+    app.run(debug=True)
+
+______---------------------------------
+
+
